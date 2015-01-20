@@ -1,8 +1,18 @@
-## Put comments here that give an overall description of what your
-## functions do
+## This file contains two functions that manipulate a "matrix object"
+#The object allows for caching of a matrix's inverse as this can
+#be a computationally expensive task.  
 
-## Write a short comment describing this function
+## makeCacheMatrix(matrix)
 #creates a special "matrix" object that can cache its inverse
+#contains four functions that can act on it to get and set values
+#of the inverted and uninverted matrix.  This constructor can be
+#used as follows:
+#
+# testmatrix <- matrix(c(1,2,5,7), nrow = 2, ncol = 2)
+# cmat <- makeCacheMatrix()
+# cmat$set(testmatrix)
+# or
+# cmat <- makeCacheMatrix(testmatrix)
 makeCacheMatrix <- function(x = matrix()) {
     inv <- NULL
     set <- function(y) {
@@ -17,10 +27,12 @@ makeCacheMatrix <- function(x = matrix()) {
          get_inverse = get_inverse)
 }
 
-
-## Write a short comment describing this function
-#computes teh inverse of the special "matrix" returned by makeCacheMatrix
-#if the inverse has already been calculated, the previous result is returned
+## cachSolve(cacheMatrixObject)
+#computes the inverse of the special "matrix" returned by makeCacheMatrix
+#if the inverse has already been calculated, the previous result is returned.
+#It can be used as follows:
+#
+# cachSolve(cmat)
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
       inv <- x$get_inverse()
